@@ -2,7 +2,7 @@ function questionForUserFirst(){
 
 let userName = prompt("Введите ваше имя","");
 let birthDate = +prompt(`${userName}, какой у вас год рождения?`);
-let thisYear = +prompt(`Подаскажите ${userName}, как сейчас год?`);
+let thisYear = +prompt(`Подаскажите ${userName}, какой сейчас год?`);
 
 function calcUserAge(birthDate,thisYear){
     return thisYear - birthDate;
