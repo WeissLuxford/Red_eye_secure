@@ -1,0 +1,444 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background: #111;
+}
+
+.container{
+  max-width: 400px;
+  width: 100%;
+  margin: 50px auto;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.scene{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150px;
+  perspective: 700px;
+  perspective-origin: 70px 200px;
+  flex-direction: column;
+  position: relative;
+}
+
+.box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  transform-style: preserve-3d;  
+  transition: 300ms;
+  transform: rotateY(20deg);
+}
+
+
+
+/* box afters start*/
+
+
+
+.box::after{
+  content: "";
+  display: block;
+  width: 200px;
+  height: 100%;
+  background: rgba(255, 0, 0, 0.089);
+  transform-style: preserve-3d;
+  transform: rotateX(90deg);
+  position: absolute;
+  top: 50px;
+  box-shadow: 0 0 100px 20px rgba(255, 255, 255, 0.805),
+  0 0 200px 20px rgba(204, 204, 204, 0.744),
+  0 0 300px 20px rgba(85, 85, 85, 0.71),
+  inset 0 0 50px 15px rgba(255, 255, 255, 0.817); 
+  user-select: none;
+  pointer-events: none;
+  z-index: -10;
+  transition: 600ms;
+}
+
+#box-1::after{
+  top: 350px;
+  opacity: 0.2;
+}
+#box-2::after{
+  top: 250px;
+  opacity: 0.4;
+}
+#box-3::after{
+  top: 150px;
+  opacity: 0.1;
+  z-index: -1000;
+}
+#box-4::after{
+  top: 50px;
+  box-shadow: 0 0 300px 20px rgba(55, 55, 218, 0.869);
+  z-index: -10;
+}
+
+#box-1{
+  z-index: 0;
+  opacity: 4;
+}
+#box-2{
+  z-index: 0;
+  opacity: 4;
+}
+#box-3{
+  z-index: 3;
+  opacity: 4;
+}
+#box-4{
+  z-index: 0;
+  opacity: 4;
+}
+
+
+
+
+/* box afters end */
+
+
+/* Hover start  */
+
+
+
+
+.box:active .left{
+  transform: rotateX(360deg);
+}
+
+
+
+.box:hover{
+  opacity: 0.7 ;
+  transform: translate(50px);
+}
+.box:active .front{
+  transform: translateZ(200px);
+}
+.box:active .back{
+  transform: translateZ(-200px) rotateY(180deg);
+}
+.box:active .left{
+  right: 200px !important;
+  transform: rotateY(270deg);
+}
+.box:active .right{
+  left: 200px !important;
+  transform: rotateY(-270deg);
+}
+
+
+
+
+/* Hover end  */
+
+.innerBox{ 
+  font-size: 18px;
+  font-style: italic;
+  font-family:  Verdana, Geneva, Tahoma, sans-serif;
+  position: absolute;
+  top: 0;
+  padding: 35px 0;
+  width: 100px;
+  background: black;
+  color: white;
+  height: 100px;
+  border: 1px solid rgb(241, 227, 227);
+  text-align: center;
+  transition: all 700ms ;
+  opacity: 1;  
+  text-shadow: 0 0 20px black;
+}
+
+.top{
+  width: 200px !important;
+  top: -50px !important; 
+  transform: rotateX(90deg);
+}
+.bottom{
+  width: 200px !important;
+  top: 50px !important; 
+  transform: rotateX(-90deg);
+  border-color: currentColor;
+}
+
+.right{
+  left: 100px !important; 
+  transform: rotateY(90deg);
+}
+
+.left{
+  right: 100px !important; 
+  transform: rotateY(-90deg);
+}
+
+.front{
+  width: 200px !important;
+  transform: translateZ(50px);
+}
+.back{
+  width: 200px !important;
+  transform: translateZ(-50px) rotateY(180deg);
+}
+
+
+/* Keyframes start */
+
+
+@keyframes anim {
+  from{
+    transform: rotateY(20deg);
+  }
+  25%{
+    transform: rotateY(200deg);
+  }
+  50%{
+    transform: rotateY(110deg) ;
+   
+  }
+  75%{
+    transform: rotateY(380deg) ;
+  }
+  to{
+    transform: rotateY(20deg);
+  }
+}
+
+@keyframes hue {
+  to{
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Keyframes end */
+
+
+.button:focus~ .scene #box-1{
+  animation: anim 10s ease-in-out infinite 0s;
+}
+.button:focus~ .scene #box-2{
+  animation: anim 10s ease-in-out infinite 300ms;
+}
+.button:focus~ .scene #box-3{
+  animation: anim 10s ease-in-out infinite 600ms;
+}
+.button:focus~ .scene #box-4{
+  animation: anim 10s ease-in-out infinite 900ms;
+} 
+.button:focus~ .scene .box .innerBox{
+  animation: hue 10s linear infinite;
+}
+.button:focus~ .scene .box::after{
+  animation: hue 10s linear infinite;
+  box-shadow: 0 0 100px 20px rgba(233, 44, 44, 0.805),
+  0 0 200px 20px rgba(232, 58, 58, 0.744),
+  0 0 300px 20px rgba(223, 132, 132, 0.71),
+  inset 0 0 50px 15px rgba(237, 80, 80, 0.295); 
+}
+.button:focus~ .scene #box-3::after{
+  opacity: 0.8;
+}
+
+
+.button:focus~ .scene #box-1 .innerBox{
+  background: rgba(60, 152, 208, 0.429);
+  color: rgb(255, 255, 255);
+
+}
+.button:focus~ .scene #box-2 .innerBox{
+  background: rgba(216, 92, 216, 0.481);
+}
+.button:focus~ .scene #box-3 .innerBox{
+  background: rgba(228, 195, 51, 0.488);
+  color: black;
+}
+.button:focus~ .scene #box-4 .innerBox{
+  background: rgba(255, 0, 0, 0.541);
+  color: rgb(0, 0, 0);
+}
+
+
+.button{
+  color: white;
+  padding: 0 10px;
+  height: 50px;
+  width: 160px;
+  background: black;
+  border: 2px solid white;
+  cursor: pointer;
+  position: absolute;
+  top: 10vh;
+  left: 30vw ;
+  transition: 200ms;
+}
+
+.button:hover{
+  color: black;
+  background: white;
+  border: 4px solid black;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Logo start */
+
+
+.second_scene{
+  max-width: 100px;
+  width: 30vw;
+  height: 60vh;
+  position: absolute;
+  top: 8vh;
+  left: 70vw;
+  perspective: 1000px;
+  perspective-origin: 77px 200px;
+}
+
+.second_scene p{
+  color: white;
+  font-size: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif ;
+  text-shadow: 0 0 2px rgb(0, 0, 0);
+  padding: 10px 20px;
+  background: black;
+  border: 2px solid #FFFFFF;
+  z-index: 12000;
+}
+
+
+
+.box_two{
+  transform: translate(-200px);
+  height: 100px;
+  width: 100px;
+  position: relative;
+  animation: end 6s ease alternate infinite ;  
+  transition: 400ms;
+  transform-style: preserve-3d;
+  z-index: -688;
+}
+
+
+
+.card{
+  transform: translate(-200px);
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  padding: 10px 0;
+  color: #FFFFFF;
+  border: 3px solid white;
+  font-size: 32px;
+  position: absolute;
+  transition: all 1s;
+  background: black;
+  z-index: -1678;
+}
+
+.card:hover{
+  border-radius: all 50px;
+}
+
+#left{
+  right: 75px;
+  transform: rotateY(-90deg);
+
+}
+
+#right{
+  left: 25px;
+  transform: rotateY(90deg);
+  background: url(../img/red_eye.jpg) no-repeat center /cover ;
+  box-shadow: 0 0 4px 1px red,
+  inset 0 0 4px 1px red;
+  border: 1px solid white;
+
+}
+#front{ 
+  transform: translateZ(25px) ;
+
+}
+#back{
+ 
+  transform: translateZ(-25px) ;
+
+}
+#top{
+  top: -25px;
+  transform: rotateX(90deg);
+
+}
+#bottom{
+  top: 25px;
+  transform: rotateX(-90deg);
+
+}
+
+
+@keyframes end {
+
+  from{
+    transform: rotateX(0deg) rotateY(0deg) translate(-200px); 
+ 
+}
+26%{
+  transform: rotateX(-30deg) rotateY(-50deg) translate(-200px);
+
+}
+    50%{
+    transform:  rotateX(30deg) rotateY(40deg) translate(-200px);
+ 
+}
+    75%{
+    transform:  rotateX(140deg) rotateY(130deg) translate(-200px);
+ 
+}
+
+    100%{
+    transform:  rotateX(160deg) rotateY(40deg) translate(-200px);
+ 
+}
+to{
+    transform: rotateX(0) rotateY(0) translate(-200px);
+}
+
+}
+
+.box_two{
+    transition: 500ms;
+}
+
+button{
+    width: 10px;
+    height: 10px;
+    color: black;
+}
+
+@media (max-width:500px) {
+  .second_scene{
+      left: -10vw;
+  }
+}
+
+
+/* Logo end */
