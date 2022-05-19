@@ -434,10 +434,16 @@ button{
     color: black;
 }
 
-@media (max-width:500px) {
+@media (max-width:550px) {
   .second_scene{
-      left: -10vw;
+      position: absolute;
+      left: 50% !important;
+      top: 15% !important;
   }
+  .second_scene p{
+    position: absolute;
+    font-size: 20px;
+}
 }
 
 
